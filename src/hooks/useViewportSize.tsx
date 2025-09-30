@@ -5,7 +5,7 @@ const eventListerOptions = {
   passive: true,
 };
 
-const useViewportSize = (): { width: number; height: number } => {
+export const useViewportSize = (): { width: number; height: number } => {
   const [windowSize, setWindowSize] = useState({
     width: 0,
     height: 0,
@@ -22,5 +22,3 @@ const useViewportSize = (): { width: number; height: number } => {
 
   return windowSize;
 }
-
-export default useViewportSize;
