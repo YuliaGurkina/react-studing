@@ -1,22 +1,17 @@
-import { useState, useEffect, useRef, RefObject } from 'react';
+import { useState, useEffect, useRef, RefObject, useCallback } from 'react';
 
 type UseHoverReturn<T extends HTMLElement = HTMLElement> = {
   hovered: boolean;
-  ref: RefObject<T>;
+  ref: RefObject<T | null>;
 };
 
 export const useHover = <T extends HTMLElement = HTMLElement>(): UseHoverReturn<T> => {
   const [hovered, setHovered] = useState(false);
   
-  const ref = useRef<T>(null as unknown as T);
+  const ref = useRef<T | null>(null);
 
-  const handleMouseEnter = (): void => {
-    setHovered(true);
-  };
-
-  const handleMouseLeave = (): void => {
-    setHovered(false);
-  };
+  const handleMouseEnter = useCallback(() => setHovered(true), []);
+  const handleMouseLeave = useCallback(() => setHovered(false), []);
 
 
   useEffect(() => {
@@ -29,6 +24,8 @@ export const useHover = <T extends HTMLElement = HTMLElement>(): UseHoverReturn<
         ref.current?.removeEventListener('mouseleave', handleMouseLeave);
       };
     }
+
+    return undefined;
   }, []);
 
   return {
