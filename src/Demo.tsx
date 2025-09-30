@@ -1,18 +1,12 @@
-import { useLocalStorage } from "./useLocalStorage";
+import { useHover } from './useHover';
 import "./App.css";
 
 function Demo() {
-  const [value, { setItem, removeItem }] = useLocalStorage("some-key");
+const { hovered, ref } = useHover<HTMLDivElement>();
 
   return (
-    <div>
-      <p>Значение из LocalStorage: {value}</p>
-      <div>
-        <button onClick={() => setItem("new storage value")}>
-          Задать значение
-        </button>
-        <button onClick={() => removeItem()}>Удалить значение</button>
-      </div>
+    <div ref={ref}>
+      {hovered ? 'На меня навели мышку' : 'Наведи мышкой на меня'}
     </div>
   );
 }
