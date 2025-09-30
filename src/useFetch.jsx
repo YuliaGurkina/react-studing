@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 export const useFetch = (url) => {
   const [data, setData] = useState(null);
@@ -26,17 +26,21 @@ export const useFetch = (url) => {
     }
   };
 
-  const refetch = ({ params = {} }) => {
-    let queryString = Object.keys(params)
-      .map(
-        (key) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`
-      )
-      .join("&");
+  const refetch = useMemo(
+    ({ params = {} }) => {
+      let queryString = Object.keys(params)
+        .map(
+          (key) =>
+            `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`
+        )
+        .join("&");
 
-    const updatedUrl = queryString ? `${url}?${queryString}` : url;
+      const updatedUrl = queryString ? `${url}?${queryString}` : url;
 
-    fetchData(updatedUrl);
-  };
+      fetchData(updatedUrl);
+    },
+    [url]
+  );
 
   useEffect(() => {
     fetchData(url);
@@ -44,3 +48,46 @@ export const useFetch = (url) => {
 
   return { data, isLoading, error, refetch };
 };
+
+/*
+import {useState, useEffect} from 'react';
+import axios from 'axios';
+
+export function useFetch(url, options = {}) {
+  const [isLoading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [data, setData] = useState(null);
+
+  function getFetch(opt = options) {
+    setLoading(true);
+
+    axios({
+      method: 'GET',
+      url,
+      ...opt,
+    })
+      .then((response) => {
+        setData(response.data);
+        setError(null);
+      })
+      .catch((error) => {
+        setError(error);
+        setData(null);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }
+
+  useEffect(() => {
+    getFetch(options);
+  }, []);
+
+  return {
+    data,
+    isLoading,
+    error,
+    refetch: getFetch
+  }
+}
+*/
