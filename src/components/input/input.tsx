@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-interface InputFieldProps {
+interface InputFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
  type?: string;
  label?: string;
  name: string;
@@ -12,11 +12,10 @@ interface InputFieldProps {
  error?: string;
  disabled?: boolean;
  className?: string;
-// style?: React.CSSProperties;
- radius?: 'sm' | 'md' | 'lg';
- size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+ radius?: keyof typeof InputRadius;
+ size?: keyof typeof InputSize;
  withAsterisk?: boolean;
- leftSection?: ReactNode
+ leftSection?: React.ReactNode
 }
 
 const InputRadius = {
