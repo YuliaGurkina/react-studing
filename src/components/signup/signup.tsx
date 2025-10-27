@@ -15,7 +15,7 @@ const initialState = {
     checkpassword: ''
   };
 
-export const Signup = ({onSubmit}) => {
+export const Signup: React.FC<SignupProps> = ({onSubmit}) => {
    // Состояние для хранения значений полей
   const [value, setValue] = useState(initialState);
 
@@ -68,15 +68,28 @@ export const Signup = ({onSubmit}) => {
             required
             placeholder="Введите email"
         />
-         <div className="radio-group">
-            <div>
+         <div className="radio-group-wrapper">
+            <div className="radio-group">
                 <label htmlFor="male">Male</label>
-                <input type="radio" id="male" name="gender" value="male" checked={value.gender === 'male'}
-            />
+                {/* <input type="radio" id="male" name="gender" value="male" checked={value.gender === 'male'}/> */}
+                 <InputField
+                    type="radio"
+                    name="gender"
+                    id="male"
+                    value='male'
+                    checked={value.gender === 'male'}
+                />
             </div>
-            <div>
+            <div className="radio-group">
                 <label htmlFor="female">Female</label>
-                <input type="radio" id="female" name="gender" value="female" checked={value.gender === 'female'}/>
+                {/* <input type="radio" id="female" name="gender" value="female" checked={value.gender === 'female'}/> */}
+                 <InputField
+                    type="radio"
+                    name="gender"
+                    id="female"
+                    value='female'
+                    checked={value.gender === 'female'}
+                />
             </div>
          </div>
        <InputField
@@ -97,7 +110,6 @@ export const Signup = ({onSubmit}) => {
             required
             placeholder="Повторите пароль"
         />
-
        
         <button type="submit">Войти</button>
       </form>

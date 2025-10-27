@@ -6,7 +6,7 @@ export const Demo = () => {
     console.log('Отправленные данные:', { email, password });
   };
 
-  const handleSignUpSubmit = (value) => {
+  const handleSignUpSubmit = (value: string) => {
     console.log('Отправленные данные:', { value });
   };
 

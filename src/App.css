@@ -22,7 +22,11 @@
 .input-field-block {
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
+}
+
+.input-field-block ~ .input-field-block,
+.input-field-block ~ .radio-group-wrapper {
+  margin-top: 20px;
 }
 
 .input-field-wrapper {
@@ -44,13 +48,13 @@
   vertical-align: top;
 }
 
-.radio-group {
+.radio-group-wrapper {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
 }
 
-.radio-group > div {
+.radio-group {
   display: flex;
   align-items: center;
 }

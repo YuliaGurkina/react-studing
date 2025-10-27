@@ -16,6 +16,7 @@ interface InputFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
  size?: keyof typeof InputSize;
  withAsterisk?: boolean;
  leftSection?: React.ReactNode
+ checked?: boolean
 }
 
 const InputRadius = {
@@ -48,11 +49,11 @@ export const InputField: React.FC<InputFieldProps> = ({
     size = "sm",
     disabled = false,
     withAsterisk = false,
-    leftSection
+    leftSection,
+    checked = false
 }) => {
-     //console.log(leftSection?.props.size);
-     return (
-        <div className="input-field-block">
+  
+        return (<div className="input-field-block">
             {label && <label htmlFor={name} className={`input-field-label ${withAsterisk ? 'input-field-label--asterisk' : ''}`}>{label}</label>}
            
             <div className={`input-field-wrapper ${error ? 'input-field-error' : ''}`}>
@@ -67,6 +68,7 @@ export const InputField: React.FC<InputFieldProps> = ({
                     placeholder={placeholder}
                     disabled={disabled}
                     onChange={(e) => onChange(e.target.value)}
+                    checked={checked}
                     style={{
                         borderRadius: InputRadius[radius],
                         fontSize: InputSize[size],
@@ -75,5 +77,5 @@ export const InputField: React.FC<InputFieldProps> = ({
                 {error && <div className='input-field-error-message'>{error}</div>}
             </div>
         </div>
-     );
+        );
 };
