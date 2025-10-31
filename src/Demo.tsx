@@ -1,4 +1,32 @@
-import { useFetch, useLocalStorage, useHover, useViewportSize } from "./hooks";
+
+import { Signin, Signup } from "./components";
+import "./App.css";
+
+export const Demo = () => {
+  const handleSignInSubmit = (email: string, password: string) => {
+    console.log('Отправленные данные:', { email, password });
+  };
+
+  const handleSignUpSubmit = (value: string) => {
+    console.log('Отправленные данные:', { value });
+  };
+
+  return (
+    <>
+    <div>
+      <h2>Sign in</h2>
+      <Signin onSubmit={handleSignInSubmit}></Signin>
+    </div>
+    {/*  */}
+    <div>
+      <h2>Sign up</h2>
+      <Signup onSubmit={handleSignUpSubmit}></Signup>
+    </div>
+    </>
+  );
+}
+
+/* import { useFetch, useLocalStorage, useHover, useViewportSize } from "./hooks";
 import "./App.css";
 
 function Demo() {
@@ -56,6 +84,8 @@ function Demo() {
       </div>
     </>
   );
+}
 
+export default Demo;
 
-}export default Demo;
+*/
